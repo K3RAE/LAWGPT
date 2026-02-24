@@ -1,0 +1,7 @@
+venv/
+venv310/
+__pycache__/
+chroma_db/
+data/
+*.sqlite3
+*.jsonl
