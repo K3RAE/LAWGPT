@@ -19,14 +19,17 @@ collection = client.get_or_create_collection(name="legal_cases")
 # ---------------- LOAD EMBEDDING MODEL ----------------
 
 print("🔹 Loading embedding model...")
-embedder = SentenceTransformer("all-MiniLM-L6-v2")
+embedder = SentenceTransformer("nlpaueb/legal-bert-base-uncased")
 
 # ---------------- CHUNK FUNCTION ----------------
 
-def chunk_text(text, chunk_size=500):
+def chunk_text(text, chunk_size=500, overlap=100):
     words = text.split()
-    for i in range(0, len(words), chunk_size):
-        yield " ".join(words[i:i + chunk_size])
+    step = chunk_size - overlap
+    for i in range(0, len(words), step):
+        chunk = " ".join(words[i:i + chunk_size])
+        if chunk:
+            yield chunk
 
 # ---------------- BUILD VECTOR DATABASE ----------------
 

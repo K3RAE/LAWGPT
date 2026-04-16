@@ -29,7 +29,7 @@ print(df["label"].value_counts())
 # ---------------- EMBEDDINGS ----------------
 
 print("\n🔹 Loading embedding model...")
-embedder = SentenceTransformer("all-MiniLM-L6-v2")
+embedder = SentenceTransformer("nlpaueb/legal-bert-base-uncased")
 
 print("🔹 Creating embeddings (this may take a moment)...")
 X = embedder.encode(df["text"].tolist(), show_progress_bar=True)
